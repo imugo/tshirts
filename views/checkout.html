@@ -1,0 +1,54 @@
+<div class="container">
+<h2 class="black-text center">Your Cart</h2>
+
+<div ng-controller="cartSummaryController">
+
+    <div class="alert alert-warning" ng-show="cartData.length == 0">
+        <p class="flow-text">There are no products in your shopping cart. <a href="#/" class="green-text">Click here to return to the catalogue</a></p>
+    </div>
+    
+    <div ng-hide="cartData.length == 0">
+    <table class="bordered highlight centered responsive-table">
+    	<thead>
+        <tr>
+          <th>Quantity</th>
+          <th>Item</th>
+          <th>Attributes</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+          <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in cartData">
+          <td>{{item.count}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.color}}/{{item.size}}</td>
+          <td>{{item.price | currency:"N"}}</td>
+          <td>{{ (item.price * item.count) | currency:"N"}}</td>
+          <td>
+            <button ng-click="remove(item.id)" class="btn red white-text">Remove</button>
+         </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="3" class="right"><h3>Total:</h3></td>
+          <td><h3>{{total() | currency: "N"}}</h3></td>
+        </tr>
+        </tfoot>
+    </table>
+    <br><br>
+    <div class="row">
+    	<div class="col s6 l6 m6">
+       	 	<a class="btn grey black-text lighten-4 left" ng-click="go_back()"><i class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="col s6 l6 m6">
+	        <a class="btn-large green white-text right" href="#/placeorder">Place order</a>
+        </div>
+    </div>
+    
+    </div>
+</div>
+</div>
+

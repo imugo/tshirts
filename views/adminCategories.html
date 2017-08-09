@@ -1,0 +1,49 @@
+<div>
+	<div class="card-panel red white-text" ng-if="categories.error">
+    	<span class="fa fa-close right" ng-click="removeError()"></span>
+    	{{categories.error}}
+    </div>
+    <div class="divider"></div>
+    <h4 class="section black-text">Edit Categories</h4>
+    <div class="divider"></div>
+    
+	<table class="table bordered highlight">
+    	<thead>
+        	<th class="flow-text"><strong>Category Name</strong></th>
+            <th class="flow-text"><strong>Description</strong></th>
+            <th class="flow-text">&nbsp;</th>
+        </thead>
+        <tbody>
+        	<tr ng-repeat="item in categories" ng-hide="item.category_id === editedCategory.category_id">
+            	<td class="flow-text">{{item.name}}</td>
+                <td class="flow-text">{{item.description}}</td>
+                <td>
+                	<a ui-sref="productAdmin({cat: {{item.category_id}}})" class="btn red white-text">Products Edit</a>
+                    <br><br>
+                    <button ng-click="startEdit(item)" class="btn red white-text">
+                    	Edit
+                    </button>
+                    <br><br>
+                    <button ng-click="deleteCategory(item)" class="btn red white-text">
+                    	Delete
+                    </button>
+                </td>
+            </tr>
+            <tr ng-class="{'red lighten-4': editedCategory}">
+                <td><input ng-model="editedCategory.name" class="flow-text" required /></td>
+                <td><input ng-model="editedCategory.description" class="flow-text" required /></td>
+                <td>
+                <button ng-hide="editedCategory.category_id" ng-click="addCategory(editedCategory)" class="btn green white-text">
+                Create
+                </button>
+                <button ng-show="editedCategory.category_id" ng-click="updateCategory(editedCategory)" class="btn green white-text">
+                Save
+                </button>
+                <button ng-show="editedCategory" ng-click="cancelEdit()" class="btn red white-text">
+                Cancel
+                </button>
+                </td>
+			</tr>
+        </tbody>
+    </table>
+</div>

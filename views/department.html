@@ -1,0 +1,51 @@
+<div ng-controller="departmentCtrl">
+	<div class="container">
+    	<div class="row">
+        	<div class="col s12 l8 m8">
+            	<br>
+            	<div class="divider"></div>
+                <a class="btn grey black-text lighten-2 waves-effect waves-light" href="#/department/{{departmentData.department.department_id}}" ng-if="categoryData.category"><i class="fa fa-arrow-left"></i> BACK</a>
+            	<h4 class="section black-text"><i class="{{departmentData.department.fa_icon}}"></i> {{departmentData.department.name | uppercase}}</h4>
+            	<p class="flow-text">{{departmentData.department.description}}</p>
+            </div>
+           <div class="col s12 l4 m4">
+           		<br>
+            	 <div class="divider"></div>
+                 <br>
+                    <div class="card-panel white z-depth-4">
+                        <h5 class="black-text center">
+                            Choose a Category
+                        </h5>
+                        <div class="center">
+                            <a class="btn grey black-text lighten-2 center"  ng-repeat="item in departmentData.categories track by $index" href="#/category/{{item.department_id}}/{{item.category_id}}">{{item.name}}</a>
+                            </div>
+                    </div>
+            </div>
+        </div>
+        <br>
+        <div class="divider"></div>
+        <br>
+             <div class="flexrows">
+             
+                    <div class="flexcols" ng-repeat="product in departmentProductsData track by $index">
+                    	<div class="card horizontal">
+                              <div class="card-image">
+                                <img src="product_images/{{product.image}}" alt="{{product.name}}" title="{{product.name}}" class="responsive-img">
+                              </div>
+                              <div class="card-stacked">
+                                <div class="card-content">
+                                    <h5 class="left">{{product.name}}</h5>
+                                    <p class="left">{{product.description | limitTo: 20}}{{product.description.length > 20 ? '...' : ''}}</p>
+                                    <br><br><br>
+                                    <p><strong>{{product.price | currency:"N"}}</strong></p>
+                                    <br>
+                                </div>
+                                <div class="card-action">
+                                  <a class="btn waves-effect waves-light grey black-text lighten-2" href="#/details/{{product.product_id}}">Buy Now</a>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+   		</div>
+    </div>

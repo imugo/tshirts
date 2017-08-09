@@ -1,0 +1,131 @@
+<div>
+	<h4>Editing Product &ndash; {{productInfo.name}}</h4>
+	<div class="row">
+    	<div class="col s12 l6 m6">
+        	 <div class="row">
+                <div class="input-field col s12">
+                	<input type="text" class="validate active" placeholder="product name" id="productName" value="{{productInfo.name}}" ng-model="productInfo.name">
+                    <label>Product Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                	<textarea id="description" placeholder="product description" class="materialize-textarea active" rows="9" ng-model="productInfo.description">{{productInfo.description}}</textarea>
+                    <label>Product Description</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s5">
+                	<input type="text" class="validate active" placeholder="product price" id="productPrice" ng-model="productInfo.price" value="{{productInfo.price}}">
+                    <label>Product Price</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s5">
+                	<input type="text" class="validate active" placeholder="product discounted price" id="dp" ng-model="productInfo.discounted_price" value="{{productInfo.discounted_price}}">
+                    <label>Discounted Price</label>
+                </div>
+            </div>
+            <div class="center">
+            	<button class="btn red white-text" ng-click="updateProduct(productInfo)">Update Info</button>
+            </div>
+        </div>
+        <div class="col s12 l6 m6">
+        	<h5>Product belong to theses categories: {{productCategories}}</h5>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                	<select class="browser-default" ng-model="TargetCategorIdRemove" ng-options="key as value for (key, value) in CategoriesInProduct">   
+                    <option value="">Categories Products belongs to</option>                
+                    </select>                    
+                </div>
+            </div>
+            <button class="btn red white-text" ng-click="removeProductFromCategory(TargetCategorIdRemove)" ng-disabled="removeFromCategoryButtonDisabled === true">Remove from category</button>
+             <div class="row">
+                <div class="input-field col s12">
+                    <select class="browser-default" ng-model="TargetCategorIdAssign" ng-options="key as value for (key, value) in newCategories">
+                    <option value="">Assign product to this category:</option>
+                    </select>
+                    <br>
+                    <button class="btn red white-text" ng-click="assignProductToCategory(TargetCategorIdAssign)">Assign</button>
+                </div>
+            </div>
+           <div class="row">
+                <div class="input-field col s12">
+                    <select class="browser-default" ng-model="TargetCategorIdMove" ng-options="key as value for (key, value) in newCategories">
+                    <option value="">Move product to this category:</option>
+                    </select>
+                    <br>
+                    <button class="btn red white-text" ng-click="moveProductToCategory(TargetCategorIdMove)" ng-disabled="removeFromCategoryButtonDisabled === false">Move</button>
+                </div>
+            </div>
+             <div class="row">
+                <div class="input-field col s12">
+                <h5>Current Display Option: {{currentDisplayOption}}</h5>
+                    <select class="browser-default" ng-model="TargetCategorIdSetDisplay" ng-options="key as value for (key, value) in productDisplayOptions">
+                    <option value="">set display options:</option>
+                    </select>
+                    <br>
+                    <button class="btn red white-text" ng-click="setProductDisplayOption(TargetCategorIdSetDisplay)">Set</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <h5>Product Attributes</h5>
+                    <select class="browser-default" ng-model="TargetAttributeIdRemove" ng-options="key as value for (key, value) in productAttributes">
+                    <option value="">Remove Attribute:</option>
+                    </select>
+                    <br>
+                    <button class="btn red white-text" ng-click="RemoveProductAttributeValue(TargetAttributeIdRemove)">Remove</button>
+                </div>
+            </div>
+             <div class="row">
+                <div class="input-field col s12">
+                    <select class="browser-default" ng-model="TargetAttributeIdAssign" ng-options="key as value for (key, value) in catalogAttributes">
+                    <option value="">Assign Attribute:</option>
+                    </select>
+                    <br>
+                    <button class="btn red white-text" ng-click="assignAttributeValueToProduct(TargetAttributeIdAssign)">Assign</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+        	<div class="col s12 m6 l6">
+            	<h5>Image Name: {{productInfo.image}} </h5>
+                <img class="responsive-img" src="product_images/{{productInfo.image}}" alt="{{productInfo.image}}">
+                <input type="hidden" ng-model="image">
+            	<div class="file-field input-field">
+                	<div class="btn red white-text">
+                    	<span>Image</span>
+                        <input type="file" file-model="myFile">
+                    </div>
+                    <div class="file-path-wrapper">
+                    	<input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <button class="btn green white-text" ng-click="uploadFile()">Upload</button>
+            </div>
+                <div class="col s12 m6 l6">
+                    <h5>Image 2 Name: {{productInfo.image_2}} </h5>
+                    <img class="responsive-img" src="product_images/{{productInfo.image_2}}" alt="{{productInfo.image_2}}">
+                    <input type="hidden" ng-model="image2">
+                    <div class="file-field input-field">
+                        <div class="btn red white-text">
+                            <span>Image</span>
+                            <input type="file" file-model="myFile">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    <button class="btn green white-text" ng-click="uploadFile2()">Upload</button>
+                </div>
+            </div>
+        </div>
+<script>
+	Materialize.updateTextFields();
+</script>
+
+
+

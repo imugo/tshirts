@@ -1,0 +1,47 @@
+<div class="container">
+	<h2 class="black-text">Check out now</h2>
+    <p class="flow-text">Please enter your details, and we will ship your goods right away!</p>
+    
+    <form class="col s12" name="shippingForm" novalidate>
+        <div class="row">
+            <div class="input-field col s12">
+                 <i class="fa fa-user-circle prefix"></i><input type="text" name="name" ng-model="data.shipping.name" class="validate" id="name" required>
+                  <label for="name">Name*</label>
+            </div>
+        </div>
+         <div class="row">
+             <div class="input-field col s12">
+                  <i class="fa fa-address-book prefix"></i><input type="text" name="street" ng-model="data.shipping.street" class="validate" id="street" required>
+                   <label for="street">Street Address*</label>
+             </div>
+        </div>
+        <div class="row">
+             <div class="input-field col s12">
+                  <i class="fa fa-map-marker prefix"></i><input type="text" name="city" ng-model="data.shipping.city" class="validate" id="city" required>
+                   <label for="city">City*</label>
+             </div>
+        </div>
+        <div class="row">
+             <div class="input-field col s12">
+                  <i class="fa fa-thumb-tack prefix"></i><input type="text" name="state" ng-model="data.shipping.state" class="validate" id="state" required>
+                   <label for="state">State*</label>
+             </div>
+        </div>
+        <div class="row">
+             <div class="input-field col s12">
+                  <i class="fa fa-globe prefix"></i><input type="text" name="country" ng-model="data.shipping.country" class="validate" id="country" required>
+                   <label for="country">Country*</label>
+             </div>
+        </div>
+        <div class="row">
+             <div class="input-field col s12">
+                  <i class="fa fa-gift prefix"></i><input type="checkbox" name="giftwrap" ng-model="data.shipping.giftwrap" class="validate" id="gift">
+                   <label for="gift">Gift wrap items?</label>
+             </div>
+        </div>
+        <p class="center">
+        	<button ng-disabled="shippingForm.$invalid" ng-click="sendOrder(data.shipping)" class="btn-large waves-effect waves-light green black-text">Complete Order<i class="fa fa-send" style="color:black;"></i></button>
+        </p><br>
+        <p class="center">Required *</p>
+    </form>
+</div>

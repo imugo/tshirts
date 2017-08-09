@@ -1,0 +1,45 @@
+<div>
+<header class="blue z-depth-2">
+    <h1 class="white-text">T-shirts Administration</h1>
+        <nav class="transparent nav-center">
+            <div class="nav-wrapper transparent white-text" ng-controller="sideBarCtrl">
+              <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="fa fa-bars fa-4x"></i></a>
+              <ul id="slide-out" class="side-nav">
+                <li>
+                    <a href="http://localhost/tshirts" ng-cloak>
+                        Store Front
+                    </a>	
+                </li>
+                <li ng-cloak>
+                	<a ng-click="department()">
+                    	Department
+                    </a>
+                </li>
+                 <li ng-cloak>
+                	<a ng-click="productAttributes()">
+                    	Product Attributes
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="logout()">
+                        Logout
+                    </a>	
+                </li>
+              </ul>
+            </div>
+        </nav>
+    </header>
+    <br>
+    <div class="container">
+    	<div class="row">
+        	<div class="col s12 l12 m12">
+            	<ui-view></ui-view>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <script>
+	  $(".button-collapse").sideNav();
+	  $('.collapsible').collapsible();
+	</script>

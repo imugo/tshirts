@@ -1,0 +1,41 @@
+<div class="container" ng-controller="firstPageCtrl">
+    <div class="row">
+        <div class="col s12 m12 l12">
+                  
+                  <div class="blob">
+                  <img src="front_page_images/pexels-photo-428340x2.jpeg" class="responsive-img front-image">
+                  <div class="welcome-message">
+                  <h2>TSHIRTS!</h2>
+                  <p class="flow-text">We have the largest collection of t-shirts with postal stamps on Earth!</p>
+                  </div>
+        </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <h4 class="section">Featured Products</h4>
+    <div class="row">
+        <div class="col l4 m4 center"><strong>Free Delivery</strong></div>
+        <div class="col l4 m4 center"><strong>Express Shipping 2-3days</strong></div>
+        <div class="col l4 m4 center"><strong>Free Returns</strong></div>
+    </div>
+    <div class="flexrows">
+    	<div class="flexcols" ng-repeat="product in firstPageData.products">
+        	<div class="card horizontal">
+                  <div class="card-image">
+                    <img src="product_images/{{product.image}}" alt="{{product.name}}" title="{{product.name}}" class="responsive-img">
+                  </div>
+                  <div class="card-stacked">
+                    <div class="card-content">
+                    	<h5 class="left">{{product.name}}</h5>
+                        <p class="left">{{product.description | limitTo: 20}}{{product.description.length > 20 ? '...' : ''}}</p>
+                        <br><br><br>
+                        <p><strong>{{product.price | currency:"N"}}</strong></p>
+                    </div>
+                    <div class="card-action">
+                      <a class="btn waves-effect waves-light grey black-text lighten-2" href="#/details/{{product.product_id}}">Buy Now</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

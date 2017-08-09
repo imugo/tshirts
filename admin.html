@@ -1,0 +1,122 @@
+<!doctype html>
+<html ng-app="tShirtsAdmin">
+<head>
+<meta charset="utf-8">
+<title>Administration</title>
+<link rel="stylesheet" href="materialize/css/materialize.min.css">
+<link rel="stylesheet" href="angularjs/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="angularjs/style.css">
+<script src="angularjs/jquery-3.1.1.min.js"></script>
+<script src="angularjs/angular.js"></script>
+<script src="ngmodules/angular-ui-router.js"></script>
+<script>
+angular.module("tShirtsAdmin", ["ui.router", "ngRoute", "customFilters"])
+.config(["$httpProvider", function($httpProvider) {
+		if (!$httpProvider.defaults.headers.get) {
+			$httpProvider.defaults.headers.get = {};
+		}
+		
+		$httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+		$httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+		$httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+	}])
+.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
+	$locationProvider.hashPrefix('');
+	
+	var login = {
+		name: 'login',
+		url: '/login',
+		component: 'login',
+  	};
+	
+	var main = {
+		name: 'main',
+		url: '/main',
+		component: 'main'
+	};
+
+	var department = {
+		name: 'department',
+		url: '/department',
+		parent: main,
+		component: 'department'
+	};
+	
+	var category = {
+		name: 'category',
+		url: '/category?dept',
+		parent: main,
+		component: 'category'
+	};
+	
+	var productAttributes = {
+		name: 'productAttributes',
+		url: '/productAttributes',
+		parent: main,
+		component: 'productAttributes'
+	};
+	
+	var attributeValues = {
+		name: 'attributeValues',
+		url: '/attributeValues?attr',
+		parent: main,
+		component: 'attributeValues'
+	};
+	
+	var productAdmin = {
+		name: 'productAdmin',
+		url: '/productAdmin?cat',
+		parent: main,
+		component: 'productAdmin'
+	};
+	
+	var productDetailsAdmin = {
+		name: 'productDetailsAdmin',
+		url: '/productDetailsAdmin?prod&cat',
+		parent: main,
+		component: 'productDetailsAdmin'
+	};
+	
+	$urlRouterProvider.otherwise('/department');
+
+	$stateProvider.state(login);
+	$stateProvider.state(main);
+	$stateProvider.state(department);
+	$stateProvider.state(category);
+	$stateProvider.state(productAttributes);
+	$stateProvider.state(attributeValues);
+	$stateProvider.state(productAdmin);
+	$stateProvider.state(productDetailsAdmin);
+})
+.controller("sideBarCtrl", function($scope, $state) {
+	$scope.department = function() {
+		$state.transitionTo('department');
+	};
+	
+	$scope.productAttributes = function() {
+		$state.transitionTo('productAttributes');
+	};
+});
+
+</script>
+<!--<script src="controllers/adminControllers.js"></script>-->
+<script src="ngmodules/angular-route.js"></script>
+<script src="controllers/adminMainController.js"></script>
+<script src="controllers/adminDepartmentController.js"></script>
+<script src="controllers/adminCategoriesController.js"></script>
+<script src="controllers/adminProductAttributes.js"></script>
+<script src="controllers/adminProductAttributeValuesCtrl.js"></script>
+<script src="controllers/productAdminController.js"></script>
+<script src="controllers/productDetailsAdminController.js"></script>
+<script src="directives/fileUpload.js"></script>
+<script src="services/httpPostFactory.js"></script>
+<script src="filters/customFilters.js"></script>
+</head>
+
+<body>
+<ui-view></ui-view>
+
+
+<script src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<div>
+	<div class="card-panel red white-text" ng-if="attributes.error">
+    	<span class="fa fa-close right" ng-click="removeError()"></span>
+    	{{attributes.error}}
+    </div>
+    <div class="divider"></div>
+    <h4 class="section black-text">Edit Product Attributes</h4>
+    <div class="divider"></div>
+    
+	<table class="table bordered highlight">
+    	<thead>
+        	<th class="flow-text"><strong>Attribute Name</strong></th>
+            <th class="flow-text">&nbsp;</th>
+        </thead>
+        <tbody>
+        	<tr ng-repeat="item in attributes" ng-hide="item.attribute_id === editedAttributes.attribute_id">
+            	<td class="flow-text">{{item.name}}</td>
+                <td>
+                	<a ui-sref="attributeValues({attr: {{item.attribute_id}}})" class="btn red white-text">Attribute Values Edit</a>
+                    <br><br>
+                    <button ng-click="startEdit(item)" class="btn red white-text">
+                    	Edit
+                    </button>
+                    <br><br>
+                    <button ng-click="deleteAttribute(item)" class="btn red white-text">
+                    	Delete
+                    </button>
+                </td>
+            </tr>
+            <tr ng-class="{'red lighten-4': editedAttributes}">
+                <td><input ng-model="editedAttributes.name" class="flow-text" required /></td>
+                <td>
+                <button ng-hide="editedAttributes.attribute_id" ng-click="addAttribute(editedAttributes)" class="btn green white-text">
+                Create
+                </button>
+                <button ng-show="editedAttributes.attribute_id" ng-click="updateAttribute(editedAttributes)" class="btn green white-text">
+                Save
+                </button>
+                <button ng-show="editedAttributes" ng-click="cancelEdit()" class="btn red white-text">
+                Cancel
+                </button>
+                </td>
+			</tr>
+        </tbody>
+    </table>
+</div>

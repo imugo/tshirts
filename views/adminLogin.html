@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="card-panel blue white-text" ng-if="!authenticationError">
+    	<span class="flow-text">Enter your username and password and click Log In to authenticate</span>
+    </div>
+    <div class="card-panel red white-text" ng-if="authenticationError">
+    	<span class="flow-text">Authentication Failed ({{authenticationError}}). Try again.</span>
+    </div>
+    <form name="authForm" novalidate>
+    	<div class="row">
+        	<div class="input-field col s12">
+    			<input name="username" type="text" class="validate" ng-model="username" id="username" required />
+                <label for="username">Username</label>
+   	 		</div>
+        </div>
+    	<div class="row">
+        	<div class="input-field col s12">
+                <input name="password" type="password" class="validate" id="password" ng-model="password" required />
+                <label for="password">Password</label>
+            </div>
+    	</div>
+    	<div class="center">
+    		<button ng-click="authenticate(username, password)" ng-disabled="authForm.$invalid" class="btn green white-text">
+    			Log In
+    		</button>
+    	</div>
+    </form>
+</div>
+<!--  ng-controller="authCtrl"-->

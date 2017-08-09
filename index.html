@@ -1,0 +1,186 @@
+<!doctype html>
+<html ng-app="tShirts">
+<head>
+<meta charset="utf-8">
+<title>Home - tshirts</title>
+<link rel="stylesheet" href="materialize/css/materialize.min.css">
+<link rel="stylesheet" href="angularjs/style.css">
+<link rel="stylesheet" href="angularjs/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="angularjs/ngProgress-master/ngProgress.css" type="text/css" media="all">
+
+<script src="angularjs/jquery-3.1.1.min.js"></script>
+<script src="angularjs/angular.js"></script>
+<script>
+	angular.module("tShirts", ["customFilters", "ngRoute", "ngProgress", "cart", "ngAnimate"])
+	.config(["$httpProvider", function($httpProvider) {
+		if (!$httpProvider.defaults.headers.get) {
+			$httpProvider.defaults.headers.get = {};
+		}
+		
+		$httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+		$httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+		$httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+	}])
+	.config(function($routeProvider, $locationProvider) {
+		$locationProvider.hashPrefix('');
+		
+		$routeProvider.when("/", {
+			templateUrl: "/tshirts/views/firstPageContents.html"
+		});
+		
+		$routeProvider.when("/index", {
+			templateUrl: "/tshirts/views/firstPageContents.html"
+		});
+		
+		$routeProvider.when("/department/:id", {
+			templateUrl: "/tshirts/views/department.html",
+		
+		});
+		
+		$routeProvider.when("/category/:id/:data*", {
+			templateUrl: "/tshirts/views/department.html"
+			
+		});
+		
+		$routeProvider.when("/details/:id", {
+			templateUrl: "/tshirts/views/product_details.html"
+		});
+		
+		$routeProvider.when("/checkout", {
+			templateUrl: "/tshirts/views/checkout.html"
+		});
+		
+		$routeProvider.when("/complete", {
+			templateUrl: "/tshirts/views/thankYou.html"
+		});
+		$routeProvider.when("/placeorder", {
+			templateUrl: "/tshirts/views/placeOrder.html"
+		});
+		
+		$routeProvider.otherwise({
+			templateUrl: "/tshirts/views/firstPageContents.html"
+		})
+	});
+</script>
+<script src="angularjs/ngProgress-master/build/ngprogress.min.js"></script>
+<script src="controllers/tShirts.js"></script>
+<script src="filters/customFilters.js"></script>
+<script src="ngmodules/angular-animate.js"></script>
+<script src="controllers/departmentController.js"></script>
+<script src="controllers/productListControllers.js"></script>
+<script src="ngmodules/angular-route.js"></script>
+<script src="controllers/departmentCountryController.js"></script>
+<script src="controllers/departmentNatureController.js"></script>
+<script src="controllers/departmentSeasonalController.js"></script>
+<script src="controllers/firstPageContentsController.js"></script>
+<script src="controllers/productDetailsController.js"></script>
+<script src="components/cart.js"></script>
+<script src="controllers/checkoutController.js"></script>
+</head>
+
+<!-- The Main Controller -->
+<body ng-controller="tShirtCtrl">
+	<!-- Product List controller -->
+    <div ng-controller="productListCtrl" ng-hide="data.error">
+        <div class="container">
+            <nav class="white black-text z-depth-0">
+                <div class="nav-wrapper">
+                    <a href="#/index" class="brand-logo black-text">tshirts</a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse black-text"><i class="fa fa-bars fa-2x"></i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <a href="#/index" class="black-text">
+                                Home
+                            </a>
+                        </li>
+                        <li ng-repeat="item in data.departmentList | orderBy:'department_id'">
+                            <a href="#/department/{{item.department_id}}" class="black-text" ng-cloak>
+                                {{item.name}}
+                            </a>	
+                        </li>
+                        <li>
+                        	<cart-summary></cart-summary>
+                        </li>
+                    </ul>
+                    <ul class="side-nav" id="mobile-demo">
+                          <li ng-click="closeSideBar()">
+                              <a href="#/index">
+                                Home
+                              </a>
+                          </li>
+                          <li ng-click="closeSideBar()" ng-repeat="item in data.departmentList | orderBy:'department_id'">
+                              <a href="#/department/{{item.department_id}}" ng-cloak>
+                               {{item.name}}
+                              </a>
+                          </li>
+                           <li>
+                        	<cart-summary></cart-summary>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    <!--<header class="blue z-depth-2">
+    	
+    	<h1 class="white-text">T-shirts</h1>
+        <nav class="transparent nav-center">
+            <div class="nav-wrapper transparent white-text">
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="fa fa-bars fa-4x"></i></a>
+              <ul id="nav-mobile" class="center hide-on-med-and-down">
+                <li>
+                    <a href="#/index">
+                        Home
+                    </a>
+                </li>
+                <li ng-repeat="item in data.departmentList | orderBy:'department_id'">
+                    <a href="#/department/{{item.department_id}}" ng-cloak>
+                        {{item.name}}
+                    </a>	
+                </li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                  <li>
+                  	  <a href="#/index">
+                        Home
+                      </a>
+                  </li>
+                  <li ng-repeat="item in data.departmentList | orderBy:'department_id'">
+                  	  <a href="#/department/{{item.department_id}}" ng-cloak>
+                       {{item.name}}
+                      </a>
+                  </li>
+              </ul>
+            </div>
+        </nav>
+    </header>-->
+   <!-- <br>
+    <div class="container">
+        <input type="text" placeholder="search"> 
+    </div>-->
+  	<div ng-view class="ngFade"></div>
+    </div>
+
+<!-- Materialize configuration -->
+<script src="materialize/js/materialize.min.js"></script>
+<script>
+ $(document).ready(function(){
+	  $('select').material_select();
+      $('.carousel').carousel();
+	  $(".button-collapse").sideNav();
+	  $('.collapsible').collapsible();
+	  $('.dropdown-button').dropdown({
+		  inDuration: 300,
+		  outDuration: 225,
+		  constrainWidth: false, // Does not change width of dropdown to that of the activator
+		  hover: true, // Activate on hover
+		  gutter: 0, // Spacing from edge
+		  belowOrigin: false, // Displays dropdown below the button
+		  alignment: 'left', // Displays dropdown with edge aligned to the left of button
+		  stopPropagation: false // Stops event propagation
+    }
+  );
+});
+	
+</script>
+</body>
+</html>

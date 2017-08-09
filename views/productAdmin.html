@@ -1,0 +1,40 @@
+<div>
+	<div class="card-panel red white-text" ng-if="products.error">
+    	<span class="fa fa-close right" ng-click="removeError()"></span>
+    	{{products.error}}
+    </div>
+    <div class="divider"></div>
+    <h4 class="section black-text">Edit Products</h4>
+    <div class="divider"></div>
+    
+	<table class="table bordered highlight">
+    	<thead>
+        	<th class="flow-text"><strong>Name</strong></th>
+            <th class="flow-text"><strong>Description</strong></th>
+            <th class="flow-text"><strong>Price</strong></th>
+            <th class="flow-text"><strong>Discounted Price</strong></th>
+            <th class="flow-text">&nbsp;</th>
+        </thead>
+        <tbody>
+        	<tr ng-repeat="item in products">
+            	<td class="flow-text">{{item.name}}</td>
+                <td class="flow-text">{{item.description}}</td>
+                <td class="flow-text">{{item.price | currency: "N"}}</td>
+                <td class="flow-text">{{item.discounted_price | currency: "N"}}</td>
+                <td>
+                	<a ui-sref="productDetailsAdmin({prod: {{item.product_id}}, cat: {{categoryId}}})" class="btn red white-text">Edit</a>
+                </td>
+            </tr>
+            <tr>
+                <td><input ng-model="editedProduct.name" class="flow-text" required /></td>
+                <td><input ng-model="editedProduct.description" class="flow-text" required /></td>
+                <td><input ng-model="editedProduct.price" class="flow-text" required /></td>
+                <td>
+                <button ng-click="addProduct(editedProduct)" class="btn green white-text">
+                Create
+                </button>
+                </td>
+			</tr>
+        </tbody>
+    </table>
+</div>

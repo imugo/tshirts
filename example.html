@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="materialize/css/materialize.min.css">
+<title>Untitled Document</title>
+<script src="angularjs/angular.js"></script>
+<script>
+	angular.module("myApp", [])
+	.controller("myCtrl", function($scope) {
+		$scope.products = [
+			{ name: "Apples", category: "Fruit", price: 1.20, expiry: "01/08/2017" },
+			{ name: "Bananas", category: "Fruit", price: 2.42, expiry: "01/08/2017" },
+			{ name: "Pears", category: "Fruit", price: 2.02, expiry: "02/08/2017" },
+			{ name: "Tuna", category: "Fish", price: 20.45, expiry: "03/08/2017" },
+			{ name: "Salmon", category: "Fish", price: 17.93, expiry: "03/08/2017" },
+			{ name: "Trout", category: "Fish", price: 12.93, expiry: "04/08/2017" },
+			{ name: "Beer", category: "Drinks", price: 2.99, expiry: "05/08/2017" },
+			{ name: "Wine", category: "Drinks", price: 8.99, expiry: "06/08/2017" },
+			{ name: "Whiskey", category: "Drinks", price: 45.99, expiry: "06/08/2017" }
+		];
+	});
+</script>
+</head>
+
+<body ng-controller="myCtrl">
+	<ul class="collection">
+    	<li class="collection-item" ng-repeat="item in products | orderBy:'-expiry'">
+        	{{item.name}}
+        </li>
+    </ul>
+</body>
+</html>

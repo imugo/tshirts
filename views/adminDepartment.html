@@ -1,0 +1,50 @@
+<div>
+	<div class="card-panel red white-text" ng-if="departments.error">
+    	<span class="fa fa-close right" ng-click="removeError()"></span>
+    	{{departments.error}}
+    </div>
+    
+    <div class="divider"></div>
+    <h4 class="section black-text">Edit Departments</h4>
+    <div class="divider"></div>
+    
+	<table class="table centered bordered highlight">
+    	<thead>
+        	<th class="flow-text"><strong>Department Name</strong></th>
+            <th class="flow-text"><strong>Description</strong></th>
+            <th class="flow-text">&nbsp;</th>
+        </thead>
+        <tbody>
+        	<tr ng-repeat="item in departments" ng-hide="item.department_id === editedDepartment.department_id">
+            	<td class="flow-text">{{item.name}}</td>
+                <td class="flow-text">{{item.description}}</td>
+                <td>
+                	<a ui-sref="category({dept: {{item.department_id}}})" class="btn red white-text">Categories Edit</a>
+                    <br><br>
+                    <button ng-click="startEdit(item)" class="btn red white-text">
+                    	Edit
+                    </button>
+                    <br><br>
+                    <button ng-click="deleteDepartment(item)" class="btn red white-text">
+                    	Delete
+                    </button>
+                </td>
+            </tr>
+            <tr ng-class="{'red lighten-4': editedDepartment}">
+                <td><input ng-model="editedDepartment.name" class="flow-text" required /></td>
+                <td><input ng-model="editedDepartment.description" class="flow-text" required /></td>
+                <td>
+                <button ng-hide="editedDepartment.department_id" ng-click="addDepartment(editedDepartment)" class="btn green white-text">
+                Create
+                </button>
+                <button ng-show="editedDepartment.department_id" ng-click="updateDepartment(editedDepartment)" class="btn green white-text">
+                Save
+                </button>
+                <button ng-show="editedDepartment" ng-click="cancelEdit()" class="btn red white-text">
+                Cancel
+                </button>
+                </td>
+			</tr>
+        </tbody>
+    </table>
+</div>
